@@ -1,0 +1,185 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom CSS Variables */
+:root {
+  /* Primary Colors */
+  --primary-bg: #0D1117;
+  --secondary-bg: #161B22;
+  --tertiary-bg: #21262D;
+  
+  /* Accent Colors */
+  --accent-blue: #58A6FF;
+  --accent-green: #3FB950;
+  --accent-orange: #FF8C42;
+  --accent-red: #F85149;
+  --accent-purple: #8957E5;
+  
+  /* Text Colors */
+  --text-primary: #F0F6FC;
+  --text-secondary: #8B949E;
+  --text-tertiary: #6E7681;
+  
+  /* Functional Colors */
+  --border-default: #30363D;
+  --border-muted: #21262D;
+  --shadow-default: rgba(0, 0, 0, 0.3);
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--secondary-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-default);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-tertiary);
+}
+
+/* Custom Utilities */
+.glass-effect {
+  background: rgba(33, 38, 45, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(48, 54, 61, 0.5);
+}
+
+.gradient-border {
+  background: linear-gradient(var(--tertiary-bg), var(--tertiary-bg)) padding-box,
+              linear-gradient(45deg, var(--accent-blue), var(--accent-purple)) border-box;
+  border: 1px solid transparent;
+}
+
+/* Animation Classes */
+.pulse-slow {
+  animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.slide-in-right {
+  animation: slideInRight 0.3s ease-out;
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+/* Focus Styles */
+.focus-ring:focus {
+  outline: 2px solid var(--accent-blue);
+  outline-offset: 2px;
+}
+
+/* Loading States */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--tertiary-bg) 25%,
+    var(--secondary-bg) 50%,
+    var(--tertiary-bg) 75%
+  );
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Monaco Editor Overrides */
+.monaco-editor {
+  background-color: var(--primary-bg) !important;
+}
+
+.monaco-editor .margin {
+  background-color: var(--secondary-bg) !important;
+}
+
+/* Terminal Styles */
+.terminal-output {
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Responsive Design */
+@media (max-width: 1400px) {
+  .sidebar-right {
+    width: 280px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .sidebar-right {
+    position: fixed;
+    right: -320px;
+    transition: right 0.3s ease;
+    z-index: 100;
+  }
+  
+  .sidebar-right.open {
+    right: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar-left {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+  
+  .sidebar-left.open {
+    transform: translateX(0);
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  :root {
+    --text-primary: #FFFFFF;
+    --primary-bg: #000000;
+    --border-default: #FFFFFF;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
